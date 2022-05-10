@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <malloc.h>
 #include <string>
@@ -5,84 +6,95 @@
 #include <Windows.h>
 
 
-typedef struct tagInfo
-{
-	int HP;
-	int MP;
 
-	int EXP;
-
-	float Att;
-	float Def;
-
-	int Level;
-
-}INFO;
-
-typedef struct tagObject
-{
-	char* Name;
-	INFO Info;
-
-}OBJECT;
+const int CLASS_Scene = 0;
+const int INVENTORY_Scene = 1;
+const int EQUIPMENT_Scene = 2;
+const int SHOP_Scene = 3;
+const int HUNTING_Scene = 4;
 
 
-
-
-
-
-
-
-void InitializePlayer(OBJECT* _Player);
-
-void InitializeEnemy(OBJECT* _Enemy);
-
-void HideCursor();
-
-
-
-
-
+void CLASS();
+void INVENTORY();
+void EQUIPMENT();
+void SHOP();
+void HUNTING();
 
 
 
 int main(void)
 {
-	HideCursor();
 
 	system("mode con:cols=120 lines=30");
 
 	system("title 김민근 Framework v0.6");
 
-	OBJECT* Player = (OBJECT*)malloc(sizeof(OBJECT));
-	InitializePlayer(Player);
+	char name[128];
+	int LVL = 1;
+	int Scene = 0;
 
-	OBJECT* Monster = (OBJECT*)malloc(sizeof(OBJECT));
-	InitializeEnemy(Monster);
+	printf_s("TEXT RPG를 시작합니다.\n\n\n\n");
+	printf_s("닉네임을 입력하세요 : ");
 
-	DWORD dwTime = GetTickCount();
-	int Delay = 1000;
+	scanf("%s", &name);
 
-	int UpCount = 0;
+	printf_s("\n닉네임은 %s 입니다.\n", name);
 
-	while (true)
+	Sleep(2000);
+
+	printf_s("\n\n\n시작하는중...\n\n");
+
+	Sleep(2000);
+
+	system("cls");
+
+	switch(Scene)
 	{
-		if (dwTime + Delay < GetTickCount())
-		{
-			dwTime = GetTickCount();
-
-			system("cls");
-
-			printf_s("%s")
-		}
+		case CLASS_Scene:
+			CLASS();
+			break;
+		case INVENTORY_Scene:
+			INVENTORY();
+			break;
+		case EQUIPMENT_Scene:
+			EQUIPMENT();
+			break;
+		case SHOP_Scene:
+			SHOP();
+			break;
+		case HUNTING_Scene:
+			HUNTING();
+			break;
 	}
 
-
-
-
-
-
-
-
 	return 0;
+}
+
+
+void CLASS()
+{
+	printf_s("직업 선택\n");
+	printf_s("1.마법사\n2.드루이드\n3.성기사\n4.전사\n");
+	
+	Scene++;
+}
+
+void INVENTORY()
+{
+
+}
+
+void EQUIPMENT()
+{
+
+}
+
+void SHOP()
+{
+
+}
+
+void HUNTING()
+{
+
 }
